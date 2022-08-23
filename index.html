@@ -1,10 +1,156 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>你好，GitHub</title>
-  </head>
-  <body>
-    <h1>覺得厲害</h1>
-  </body>
+<html lang="en">
+<head>  
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+  <link href="http://vjs.zencdn.net/7.10.2/video-js.min.css" rel="stylesheet">
+  <script src="http://vjs.zencdn.net/7.10.2/video.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-flash@2/dist/videojs-flash.min.js"></script>  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" crossorigin="anonymous">
+  <!--link rel="stylesheet" href="./index.css"-->
+	<link rel="shortcut icon" href="./file./favicon.ico">
+  <title>stanleychen0924.github.io</title>
+  
+  <style>
+  hr.style-one {
+      border: 0;
+      height: 1px;
+      background: #333;
+      background-image: linear-gradient(to right, #ccc, #333, #ccc);
+  }
+	</style>
+  <style>
+  hr.style-two {
+      border: 0;
+      height: 1px;
+      background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+  }
+	</style>  
+  <style>
+  hr.style-three {
+      border: 0;
+      border-bottom: 1px dashed #ccc;
+      background: #999;
+  }
+	</style>  
+  <style>
+  hr.style-four {
+      height: 12px;
+      border: 0;
+      box-shadow: inset 0 12px 12px -12px rgba(0,0,0,0.5);
+  }
+	</style>    
+  <style>
+  hr.style-five {
+      border: 0;
+      height: 0; /* Firefox... */
+      box-shadow: 0 0 10px 1px black;
+  }
+  hr.style-five:after {  /* Not really supposed to work, but does */
+      content: "\00a0";  /* Prevent margin collapse */
+  }
+	</style>  
+  <style>
+  hr.style-six {
+      border: 0;
+      height: 0;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+  }
+	</style> 
+  <style>
+  hr.style-seven {
+      height: 30px;
+      border-style: solid;
+      border-color: black;
+      border-width: 1px 0 0 0;
+      border-radius: 20px;
+  }
+  hr.style-seven:before { 
+      display: block;
+      content: "";
+      height: 30px;
+      margin-top: -31px;
+      border-style: solid;
+      border-color: black;
+      border-width: 0 0 1px 0;
+      border-radius: 20px;
+  }
+	</style>
+  <style>
+		.button {
+  		border: none;
+  		color: white;
+  		padding: 15px 32px;
+  		text-align: center;
+  		text-decoration: none;
+  		display: inline-block;
+  		font-size: 16px;
+  		margin: 4px 2px;
+  		cursor: pointer;
+	}
+
+	.Green {background-color: #4CAF50;} /* Green */
+	.Blue {background-color: #008CBA;} /* Blue */
+	.Red {background-color: #cd252d;} /* Red */
+	</style>
+  <title>https://stanleychen0924.github.io/Myself/</title>  
+	
+</head>
+<frameset cols="300,80" >
+<!--frameset cols=200 ,* rows=* -->
+<!--frameset cols=100,* rows=* -->
+<!--ROWS="100,*" 上下分割-->
+<!--cols=200,* rows=* 左右分割-->
+<!--frame src = "left.html">
+<frame src = "right.html"-->
+
+<frame src="right.html" name="right">
+
+<frame src="left.html" name="left">
+
+</frameset>
+<script>
+	function ChangeDisabled(value){
+	!@	if(value=='1'){
+	!@		document.getElementById('TetstText').disabled=false;!@
+	!@		document.getElementById('TetstText').disabled=false;
+	!@	}else{
+	!@	document.getElementById('TetstText').disabled=true;!@
+	!@	document.getElementById('TetstText').disabled=true;
+	!@}
+	}
+	</script>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-P2WSTMR');</script>
+	
+  <script language="JavaScript"> 
+	<!--  
+	document.write('<div align="center"><font size="5">'); 
+	document.write("<span id='clock'></span>"); 
+	var now,hours,minutes,seconds,timeValue; 
+
+	function showtime(){ 
+	now = new Date(); 
+	hours = now.getHours(); 
+	minutes = now.getMinutes(); 
+	seconds = now.getSeconds(); 
+	timeValue = (hours >= 12) ? "?U?? : "?W??; 
+	timeValue += ((hours > 12) ? hours - 12 : hours) + " 時"; 
+	timeValue += ((minutes < 10) ? " 0" : " ") + minutes + " 分"; 
+	timeValue += ((seconds < 10) ? " 0" : " ") + seconds + " 秒"; 
+	clock.innerHTML = timeValue; 
+	setTimeout("showtime()",100); 
+	} 
+
+	showtime(); 
+	document.write('</font></div>');
+	//--> 
+	</script>
+
 </html>
