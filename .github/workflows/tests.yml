@@ -1,0 +1,113 @@
+# workflow 的名稱，會在 Github Action 頁面上顯示的名稱（選擇性）
+name: CI
+# 只有在 push 到 main 分支上才會觸發此 workflow
+on:
+  push:
+    branches:
+      - main
+
+# 建立一個 job
+jobs:
+  # 將此 job 的名稱設定為 'tests'
+  tests:
+    # 執行在最新版本的 ubuntu runner 上
+    runs-on: ubuntu-latest
+    # 設定系統上的環境變數，其中包含第三方服務金鑰或是連線資料庫的設定 (例如 MySQL 還有 redis)
+    env:
+      DB_DATABASE: blog_tests
+      DB_USERNAME: root
+      DB_PASSWORD: password
+      BROADCAST_DRIVER: log
+      CACHE_DRIVER: redis
+      QUEUE_CONNECTION: redis
+      SESSION_DRIVER: redis
+      MAIL_MAILER: smtp
+      MAIL_HOST: smtp.mailtrap.io
+      MAIL_PORT: 2525
+      # 較為機敏的資料，例如第三方服務的金鑰，可以存放在 GitHub Action 的 secrets
+      # 在 yaml 檔案中可以使用 ${{ secrets.SECRET_NAME }} 取得 secrets 中存放的值
+      MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+      MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+      MAIL_ENCRYPTION: tls
+      MAIL_FROM_ADDRESS: from@example.com
+      SCOUT_PREFIX: dev_posts
+      ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+      ALGOLIA_SECRET: ${{ secrets.ALGOLIA_SECRET }}
+
+    # 使用 container 建立會使用到第三方服務 (例如 MySQL 還有 redis)，並建立網路連線
+    services:
+      mysql:
+        image: mysql:latest
+        # 設定 container 中的環境變數
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: blog_tests
+        ports:
+          - 3306/tcp
+        # 測試 MySQL 執行是否正常
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+      redis:
+        image: redis
+        ports:
+          - 6379/tcp
+        options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      # 使用 actions/checkout@v3 這個官方的 action
+      # 可以查看 workflow 的執行狀況，並對 workflow 的虛擬環境進行指令操作（例如搭建測試環境）
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # 設定 PHP 環境
+      # https://github.com/shivammathur/setup-php
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, dom, fileinfo, mysql, redis
+          coverage: xdebug
+
+      - name: Start mysql service
+        run: sudo systemctl start mysql
+
+      - name: Get composer cache directory
+        # 幫此步驟建立一個 unique id
+        id: composer-cache
+        # 使用 workflow command 中的 ::set-outputs 來設定 dir 為 composer cache 的路徑
+        # 範例 echo "::set-output name=action_fruit::strawberry"
+        # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-output-parameter
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      # 建立 composer cache 檔案的快取，加快 workflow 的執行速度
+      # https://github.com/actions/cache
+      # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows
+      # https://github.com/actions/cache/blob/main/examples.md#php---composer
+      - name: Cache composer dependencies
+        uses: actions/cache@v3
+        with:
+          # 設定要進行快取檔案目錄的路徑
+          # 使用剛剛 ::set-outputs 指令所設定的 dir，即 composer cache 的路徑
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install composer dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Prepare the application
+        run: |
+          php -r "file_exists('.env') || copy('.env.example', '.env');"
+          php artisan key:generate
+
+      - name: Run Migration
+        run: php artisan migrate -v
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
+
+      - name: Test with phpunit
+        run: vendor/bin/phpunit --coverage-text
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
