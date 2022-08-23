@@ -10,7 +10,7 @@
         S08 = SBS-LOVE FM
         S09 = SBS-MTV
         S19 = SBS-GorealraM
-
+        S20 = K-POP
         // 非开播时间获取不到链接 ？ //
         * S17 = SBS-POWER FM *
         * S18 = SBS-LOVE FM *
