@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="http://vjs.zencdn.net/7.10.2/video-js.min.css" rel="stylesheet">
+  <!--引入播放器js-->  
+  <script src="http://vjs.zencdn.net/7.10.2/video.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-flash@2/dist/videojs-flash.min.js"></script>  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" crossorigin="anonymous">
+	<link rel="shortcut icon" href="./file./favicon.ico">
+  <!--link rel="stylesheet" href="./index.css">
+	
+	<link rel="shortcut icon" href="https://api.mtyqx.cn/favicon.ico">
+	<link href="https://api.mtyqx.cn/static/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://img.r10086.com/b/bootstrap.min.css" rel="stylesheet">
+	<link href="https://img.r10086.com/b/%E7%81%AF%E7%AC%BC.css" rel="stylesheet"-->
+	
+  <title>StanleyChen0924</title>
+  
+  <style>
+  hr.style-one {
+      border: 0;
+      height: 1px;
+      background: #333;
+      background-image: linear-gradient(to right, #ccc, #333, #ccc);
+  }
+	</style>
+  <style>
+  hr.style-two {
+      border: 0;
+      height: 1px;
+      background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+  }
+	</style>  
+  <style>
+  hr.style-three {
+      border: 0;
+      border-bottom: 1px dashed #ccc;
+      background: #999;
+  }
+	</style>  
+  <style>
+  hr.style-four {
+      height: 12px;
+      border: 0;
+      box-shadow: inset 0 12px 12px -12px rgba(0,0,0,0.5);
+  }
+	</style>    
+  <style>
+  hr.style-five {
+      border: 0;
+      height: 0; /* Firefox... */
+      box-shadow: 0 0 10px 1px black;
+  }
+  hr.style-five:after {  /* Not really supposed to work, but does */  		
+      content: "\00a0";  /* Prevent margin collapse */
+  }
+	</style>  
+  <style>
+  hr.style-six {
+      border: 0;
+      height: 0;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+  }
+	</style> 
+  <style>
+  hr.style-seven {
+      height: 30px;
+      border-style: solid;
+      border-color: black;
+      border-width: 1px 0 0 0;
+      border-radius: 20px;
+  }
+  hr.style-seven:before { 
+      display: block;
+      content: "";
+      height: 30px;
+      margin-top: -31px;
+      border-style: solid;
+      border-color: black;
+      border-width: 0 0 1px 0;
+      border-radius: 20px;
+  }
+	</style>
+  <style>
+  hr.style-eight {
+      padding: 0;
+      border: none;
+      border-top: medium double #333;
+      color: #333;
+      text-align: center;
+  }
+  hr.style-eight:after {
+      content: "請輸入文字";
+      display: inline-block;
+      position: relative;
+      top: -0.7em;
+      font-size: 1.5em;
+      padding: 0 0.25em;
+      background: white;
+  }
+  </style>
+  <style>
+		.button {
+  		border: none;
+  		color: white;
+  		padding: 15px 32px;
+  		text-align: center;
+  		text-decoration: none;
+  		display: inline-block;
+  		font-size: 16px;
+  		margin: 4px 2px;
+  		cursor: pointer;
+	}
+
+	.Green {background-color: #4CAF50;} /* Green */
+	.Blue {background-color: #008CBA;} /* Blue */
+	.Red {background-color: #cd252d;} /* Red */
+	</style>
+  <title>StanleyChen0924</title>
+	
+	<script src="video.js"></script>
+	<script src="videojs-contrib-hls.min.js"></script>
+	<script>
+	var player = videojs('example-video');
+	player.play();
+	</script>
+	<center>
+	<script language="JavaScript"> 
+	<!--  
+	document.write('<div align="center"><font size="6">'); 
+	document.write("<span id='clock'></span>"); 
+	var now,hours,minutes,seconds,timeValue;
+	function showtime(){
+	now = new Date();
+	hours = now.getHours();
+	minutes = now.getMinutes();
+	seconds = now.getSeconds();
+	timeValue = (hours >= 12) ? "下午" : "上午";
+	timeValue += ((hours > 12) ? hours - 12 : hours) + " 點";
+	timeValue += ((minutes < 10) ? " 0" : " ") + minutes + " 分";
+	timeValue += ((seconds < 10) ? " 0" : " ") + seconds + " 秒";
+	clock.innerHTML = timeValue;
+	setTimeout("showtime()",100);
+	}
+	showtime();
+	document.write('</font></div>');
+	//-->
+	</script>
+	
+	</center>
+	
+	
+</head>
+
+
+	<body bgcolor=#96dfee>
+	
+  <center>
+  	<iframe width="800" height="500" src="https://www.youtube.com/embed/4Uc00FPs27M?modestbranding=1&rel=0&hd=1&autoplay=1&controls=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </center>
+	<hr class="style-five" />  
+  
+
+	<script>
+	function ChangeDisabled(value){
+　	if(value=='1'){
+　		document.getElementById('TetstText').disabled=false;　// 變更欄位為可用
+　		document.getElementById('TetstText').disabled=false;
+　	}else{
+　	document.getElementById('TetstText').disabled=true;　// 變更欄位為禁用
+　	document.getElementById('TetstText').disabled=true;
+	　}
+	}
+	</script>
+	<script>
+	function Control(x){
+	if(x=='start'){
+　	document.getElementById("MovieShow").play();
+	}else if(x=='stop'){
+　	document.getElementById("MovieShow").pause();
+	}}
+	</script>
+
+</body>  
+</html>
