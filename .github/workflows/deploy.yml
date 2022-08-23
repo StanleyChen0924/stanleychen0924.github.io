@@ -1,0 +1,48 @@
+name: CD
+# 只有在 CI 的 workflow 完成時才會執行此 workflow
+# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_run
+on:
+  workflow_run:
+    workflows: [ CI ]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # 注意前面 workflow_run 的 completed 意思是「完成」，不論執行結果成功或是失敗都算是「完成」
+    # 但是一般來說測試如果失敗就應該暫停部屬至正式環境
+    # 因此這裡加上一個 if 判斷，只有 CI 成功才會執行此 workflow
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_run
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - run: echo "tests workflow is ${{ github.event.workflow_run.conclusion }}"
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # 使用 appleboy/ssh-action@master 這個 action 遠端連線至正式環境
+      # https://github.com/appleboy/ssh-action
+      - name: Deployment
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
+          # 執行部屬的指令
+          script: |
+            cd /var/www/html/blog
+            echo '啟用 Laravel 內建的維護模式'
+            sudo -u www-data php artisan down
+            echo '使用 git pull 更新專案'
+            sudo -u www-data git pull --ff-only
+            sudo -u www-data composer install --no-progress --prefer-dist --optimize-autoloader --no-dev
+            sudo -u www-data npm install
+            sudo -u www-data npm run production
+            sudo -u www-data php artisan view:cache
+            sudo -u www-data php artisan config:cache
+            sudo -u www-data php artisan route:cache
+            sudo supervisorctl restart all
+            sudo -u www-data php artisan up
