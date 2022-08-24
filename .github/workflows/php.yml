@@ -1,82 +1,59 @@
-name: Main workflow
+name: build
+
 on:
-  workflow_dispatch:
-  pull_request:
-    branches:
-      - master
-      - develop
-      - verbose
-    paths-ignore:
-      - '**.md'
-      - 'examples/**'
   push:
-    branches:
-      - master
-      - develop
-      - verbose
-    paths-ignore:
-      - '**.md'
-      - 'examples/**'
-permissions:
-  contents: read
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   run:
-    name: Run
-    runs-on: ${{ matrix.operating-system }}
-    strategy:
-      fail-fast: false
-      matrix:
-        operating-system: [ubuntu-22.04, ubuntu-20.04, ubuntu-18.04, windows-2019, macos-latest]
-        php-versions: ['5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
-    env:
-      extensions: xml, opcache, xdebug, pcov, gd
-      key: cache-v5
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      runs-on: ${{ matrix.operating-system }}
+      strategy:
+        matrix:
+          operating-system: [ubuntu-16.04]
+          php-versions: ['7.1', '7.2', '7.3']
+      name: PHP ${{ matrix.php-versions }}
+ 
+      steps:
+        - uses: actions/checkout@v2
+        
+        - name: Start MySQL service
+          run: sudo service mysql start
 
-      - name: Setup cache environment
-        id: cache-env
-        uses: shivammathur/cache-extensions@develop
-        with:
-          php-version: ${{ matrix.php-versions }}
-          extensions: ${{ env.extensions }}
-          key: ${{ env.key }}
+        - name: MySQL - Create database.
+          run: sudo mysql -uroot -proot -h 127.0.0.1 -e 'CREATE DATABASE shieldon_unittest;'
 
-      - name: Cache extensions
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.cache-env.outputs.dir }}
-          key: ${{ steps.cache-env.outputs.key }}
-          restore-keys: ${{ steps.cache-env.outputs.key }}
+        - name: MySQL - Create user.	
+          run: sudo mysql -uroot -proot -h 127.0.0.1 -e "CREATE USER 'shieldon'@'localhost' IDENTIFIED BY 'taiwan';"	
 
-      - name: Setup PHP with extensions and custom config
-        run: node dist/index.js
-        env:
-          php-version: ${{ matrix.php-versions }}
-          extensions: ${{ env.extensions }}
-          ini-values: post_max_size=256M, short_open_tag=On, date.timezone=Asia/Kolkata
+        - name: MySQL - Grant permission.	
+          run: sudo mysql -uroot -proot -h 127.0.0.1 -e "GRANT ALL ON shieldon_unittest.* TO 'shieldon'@'localhost';"
 
-      - name: Testing PHP version
-        run: |
-          php -v
-          php -r "if(strpos(phpversion(), '${{ matrix.php-versions }}') === false) {throw new Exception('Wrong PHP version Installed');}"
+        - name: Install Redis service.
+          run: sudo apt-get install -y redis-server
 
-      - name: Testing Composer version
-        run: |
-          composer -V
-          php -r "if(strpos(@exec('composer -V'), 'Composer version') === false) {throw new Exception('Composer not found');}"
-      - name: Testing Extensions
-        run: |
-          php -m
-          php -r "if(! extension_loaded('gd')) {throw new Exception('gd not found');}"
-          php -r "if(! extension_loaded('xml')) {throw new Exception('xml not found');}"
-          php -r "if(! extension_loaded('Xdebug')) {throw new Exception('Xdebug not found');}"
-          php -r "if(phpversion()>=7.1 && ! extension_loaded('pcov')) {throw new Exception('PCOV not found');}"
-      - name: Testing ini values
-        run: |
-          php -r "if(ini_get('memory_limit')!='-1') {throw new Exception('memory_limit not disabled');}"
-          php -r "if(ini_get('post_max_size')!='256M') {throw new Exception('post_max_size not added');}"
-          php -r "if(ini_get('short_open_tag')!=1) {throw new Exception('short_open_tag not added');}"
-          php -r "if(ini_get('date.timezone')!='Asia/Kolkata') {throw new Exception('date.timezone not added');}"
+        - name: Start Redis service.
+          run: sudo service redis-server start
+          
+        - name: Setup PHP with Xdebug
+          uses: shivammathur/setup-php@v2
+          with:
+            php-version: ${{ matrix.php-versions }}
+            extensions: mbstring, pdo, pdo_mysql, intl, zip, redis, ctype, json
+            coverage: xdebug
+       
+        - name: Create a folder for testing.
+          run: sudo mkdir /home/runner/work/simple-cache/simple-cache/tmp
+        
+        - name: Make folder writable.
+          run: sudo chmod 777 /home/runner/work/simple-cache/simple-cache/tmp
+
+        - name: Install dependencies
+          run: composer install --prefer-dist --no-interaction --dev
+
+        - name: Update packages
+          run: composer self-update
+
+        - name: Run tests.
+          run: composer test
