@@ -1,6 +1,6 @@
 # Myself
 
-- [stanleychen0924.github.io](https://stanleychen0924.github.io/){:target="_blank"}
+- [stanleychen0924.github.io](https://stanleychen0924.github.io/:target="_blank")
 
 | GitHub Action  | 
 | -------------- | 
