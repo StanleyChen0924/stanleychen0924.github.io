@@ -11,7 +11,7 @@ jobs:
   # 將此 job 的名稱設定為 'tests'
   tests:
     # 執行在最新版本的 ubuntu runner 上
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     # 設定系統上的環境變數，其中包含第三方服務金鑰或是連線資料庫的設定 (例如 MySQL 還有 redis)
     env:
       DB_DATABASE: blog_tests
