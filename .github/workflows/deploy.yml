@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     # 注意前面 workflow_run 的 completed 意思是「完成」，不論執行結果成功或是失敗都算是「完成」
     # 但是一般來說測試如果失敗就應該暫停部屬至正式環境
