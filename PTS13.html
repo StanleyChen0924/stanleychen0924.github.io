@@ -1,0 +1,154 @@
+﻿<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">	
+	<center>
+
+	<!-- 20220914 Add Begin-->
+	<script language="JavaScript">
+	<!--	
+	var enabled = 0; today = new Date();
+	var day; var date;
+	var h = today.getHours();
+	var m = today.getMinutes();
+	var s = today.getSeconds();
+	
+	if(today.getDay()==0) day = "星期日"
+	if(today.getDay()==1) day = "星期一"
+	if(today.getDay()==2) day = "星期二"
+	if(today.getDay()==3) day = "星期三"
+	if(today.getDay()==4) day = "星期四"
+	if(today.getDay()==5) day = "星期五"
+	if(today.getDay()==6) day = "星期六"
+	//date = " 民國 " +((today.getYear())-1911) + " (西元 "+ (today.getYear()) +" )" + " 年 "+ (today.getMonth() + 1 ) + " 月 " + today.getDate() + " 日 " + day+" ";
+	date = " 民國 " + ((today.getYear())-11)  + " (西元 "+ (today.getYear()+1900) +" )" + " 年 "+ (today.getMonth() + 1 ) + " 月 " + today.getDate() + " 日 " + day+" ";
+	var text = date;
+	var speed = 100;
+	var x = 0;
+	var color = new Array(
+	"red",
+	"blue",
+	"green",
+	"black",
+	"pink",
+	"red",
+	"brown"
+	);
+	if(navigator.appName == "Netscape")
+	{
+	document.write('<layer id="c"><center>'+text+'</center></layer><br>');
+	}
+	if(navigator.appName == "Microsoft Internet Explorer")
+	{
+	document.write('<div id="c"><center>'+text+"<span id='clock'></span>"+'</center></div>');
+	var now,hours,minutes,seconds,timeValue;
+	function showtime(){
+	now = new Date();
+	hours = now.getHours();
+	minutes = now.getMinutes();
+	seconds = now.getSeconds();
+	timeValue = (hours >= 12) ? "下午 " : "上午 ";
+	timeValue += ((hours > 12) ? hours - 12 : hours) + "時";
+	timeValue += ((minutes < 10) ? " 0" : " ") + minutes + "分";
+	timeValue += ((seconds < 10) ? " 0" : " ") + seconds+ "秒";
+	clock.innerHTML = timeValue;
+	setTimeout("showtime()",100);
+	}
+	showtime();
+	document.write('</font></div>');	
+	}
+	function changecolor()
+	{
+	if(navigator.appName == "Netscape")
+	{
+	document.c.document.write('<center><font color="'+color[x]);
+	document.c.document.write('">'+text+'</font></center>');
+	document.c.document.close();
+	}
+	else if (navigator.appName == "Microsoft Internet Explorer"){
+	document.all.c.style.color = color[x];
+	}
+	if(x < color.length-1)
+	{
+	x=x+1
+	}
+	else
+	{
+	x = 0;
+	}
+	}
+	setInterval("changecolor()",300);	
+	-->
+	</script>
+	<!-- 20220914 Add End-->
+	
+	<script>
+	function ChangeDisabled(value){
+	¡@	if(value=='1'){
+	¡@		document.getElementById('TetstText').disabled=false;¡@
+	¡@		document.getElementById('TetstText').disabled=false;
+	¡@	}else{
+	¡@	document.getElementById('TetstText').disabled=true;¡@
+	¡@	document.getElementById('TetstText').disabled=true;
+	¡@}
+	}
+	</script>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-P2WSTMR');</script>
+	
+  <script language="JavaScript"> 
+	<!--  
+	document.write('<div align="center"><font size="5">'); 
+	document.write("<span id='clock'></span>"); 
+	var now,hours,minutes,seconds,timeValue; 
+
+	function showtime(){ 
+	now = new Date(); 
+	hours = now.getHours(); 
+	minutes = now.getMinutes(); 
+	seconds = now.getSeconds(); 
+	timeValue = (hours >= 12) ? "下午 : "上午 "; 
+	timeValue += ((hours > 12) ? hours - 12 : hours) + " h"; 
+	timeValue += ((minutes < 10) ? " 0" : " ") + minutes + " m"; 
+	timeValue += ((seconds < 10) ? " 0" : " ") + seconds + " s";
+	clock.innerHTML = timeValue; 
+	setTimeout("showtime()",100); 
+	} 
+
+	showtime(); 
+	document.write('</font></div>');
+	//--> 
+	</script>
+
+	
+	<script language="JavaScript"> 
+	<!--  
+	document.write('<div align="center"><font size="6">'); 
+	document.write("<span id='clock'></span>"); 
+	var now,hours,minutes,seconds,timeValue;
+	function showtime(){
+	now = new Date();
+	hours = now.getHours();
+	minutes = now.getMinutes();
+	seconds = now.getSeconds();
+	timeValue = (hours >= 12) ? "下午" : "上午";
+	timeValue += ((hours > 12) ? hours - 12 : hours) + " 點";
+	timeValue += ((minutes < 10) ? " 0" : " ") + minutes + " 分";
+	timeValue += ((seconds < 10) ? " 0" : " ") + seconds + " 秒";
+	clock.innerHTML = timeValue;
+	setTimeout("showtime()",100);
+	}
+	showtime();
+	document.write('</font></div>');
+	//-->
+	</script>
+	</center>
+</head>
+<center>
+<iframe width="100%" height="100%" src="https://www.youtube.com/embed/4Uc00FPs27M?modestbranding=1&rel=0&hd=1&autoplay=1&controls=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+</html>
