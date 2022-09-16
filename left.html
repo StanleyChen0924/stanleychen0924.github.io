@@ -94,6 +94,28 @@
 	    });
 	}
 	</script>
+	 
+	<script language="JavaScript"> 
+	<!--  
+	document.write('<div align="center"><font size="6">'); 
+	document.write("<span id='clock'></span>"); 
+	var now,hours,minutes,seconds,timeValue;
+	function showtime(){
+	now = new Date();
+	hours = now.getHours();
+	minutes = now.getMinutes();
+	seconds = now.getSeconds();
+	timeValue = (hours >= 12) ? "下午" : "上午";
+	timeValue += ((hours > 12) ? hours - 12 : hours) + " 點";
+	timeValue += ((minutes < 10) ? " 0" : " ") + minutes + " 分";
+	timeValue += ((seconds < 10) ? " 0" : " ") + seconds + " 秒";
+	clock.innerHTML = timeValue;
+	setTimeout("showtime()",100);
+	}
+	showtime();
+	document.write('</font></div>');
+	//-->
+	</script>
 	<body oncontextmenu="return false" onselectstart="return false">
 	</head>
 	<body oncontextmenu="return false" onselectstart="return false">
