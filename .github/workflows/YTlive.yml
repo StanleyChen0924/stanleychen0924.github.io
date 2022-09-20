@@ -325,6 +325,15 @@ jobs:
         #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000
         $(youtube-dl -g http://www.youtube.com/channel/UCA_hK5eRICBdSOLlXKESvEg/live)
         EOL
+        - name: Get KBSKOREA.m3u8
+      run: |
+        touch ./KBSKOREA.m3u8
+        sudo cat >./KBSKOREA.m3u8 <<EOL
+        #EXTM3U
+        #EXT-X-VERSION:3
+        #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000        
+        $(youtube-dl -g https://www.youtube.com/watch?v=HnfpTMtfFk8)
+        EOL
     - name : Upload artifact
       uses: actions/upload-artifact@master
       with:
