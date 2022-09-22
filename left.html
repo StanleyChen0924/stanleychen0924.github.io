@@ -94,28 +94,6 @@
 	    });
 	}
 	</script>
-	 
-	<script language="JavaScript"> 
-	<!--  
-	document.write('<div align="center"><font size="6">'); 
-	document.write("<span id='clock'></span>"); 
-	var now,hours,minutes,seconds,timeValue;
-	function showtime(){
-	now = new Date();
-	hours = now.getHours();
-	minutes = now.getMinutes();
-	seconds = now.getSeconds();
-	timeValue = (hours >= 12) ? "下午" : "上午";
-	timeValue += ((hours > 12) ? hours - 12 : hours) + " 點";
-	timeValue += ((minutes < 10) ? " 0" : " ") + minutes + " 分";
-	timeValue += ((seconds < 10) ? " 0" : " ") + seconds + " 秒";
-	clock.innerHTML = timeValue;
-	setTimeout("showtime()",100);
-	}
-	showtime();
-	document.write('</font></div>');
-	//-->
-	</script>
 	<body oncontextmenu="return false" onselectstart="return false">
 	</head>
 	<body oncontextmenu="return false" onselectstart="return false">
@@ -179,6 +157,66 @@
 	<script type="text/javascript" language="javascript">
 			navList(12);
 	</script>
+	
+	<script language="JavaScript">
+	document.write('<font size="3" color="#ae8f00">'); 
+	var day="";
+	var month="";
+	var ampm="";
+	var myweekday="";
+	var year="";
+	mydate=new Date();
+	myweekday=mydate.getDay();
+	mymonth=mydate.getMonth()+1;
+	myday= mydate.getDate();
+	myyear= mydate.getYear();
+	year=(myyear > 200) ? myyear : 1900 + myyear;
+	if(myweekday == 0)
+	weekday=" 星期日 ";
+	else if(myweekday == 1)   
+	weekday=" 星期一 ";
+	else if(myweekday == 2)   
+	weekday=" 星期二 ";
+	else if(myweekday == 3)   
+	weekday=" 星期三 ";
+	else if(myweekday == 4)   
+	weekday=" 星期四 ";
+	else if(myweekday == 5)   
+	weekday=" 星期五 ";
+	else if(myweekday == 6)   
+	weekday=" 星期六 ";
+	document.write(year+"/"+mymonth+"/"+myday+"/ "+weekday);
+	document.write('</font>');
+	</script>		
+	<br>
+	<script language="JavaScript"> 
+	<!--  
+	document.write('<font size="3" color="#ae8f00">'); 
+	document.write("<span id='clock'></span>"); 
+	var now,hours,minutes,seconds,timeValue;
+	function showtime(){
+	now = new Date();
+	hours = now.getHours();
+	minutes = now.getMinutes();
+	seconds = now.getSeconds();
+	timeValue = (hours >= 12) ? "PM " : "AM ";
+	timeValue += ((hours > 12) ? hours - 12 : hours) + ":";
+	timeValue += ((minutes < 10) ? " 0" : " ") + minutes + ":";
+	timeValue += ((seconds < 10) ? " 0" : " ") + seconds;
+	clock.innerHTML = timeValue;
+	setTimeout("showtime()",100);
+	}
+	showtime();
+	document.write('</font></div>');
+	//-->
+	</script>	
+	<!-----天氣------>
+	<iframe id="fancybox-frame" name="fancybox-frame1513752474701" frameborder="0" height="25" scrolling="no"
+		hspace="0" align="middle" font color="#ae8f00"
+		src="http://i.tianqi.com/index.php?c=code&id=1&bdc=%23&icon=1&wind=0&num=1">
+	</iframe>
+	<!-----天氣------>
+		
 		
 	</center>
 	</div>
