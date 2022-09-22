@@ -1,0 +1,6 @@
+body{margin:0px;background:#000;}
+.close {MARGIN: 0px;}
+.close a {BACKGROUND: url(c.gif) no-repeat;BACKGROUND-POSITION: 0px 0px; DISPLAY: block;FLOAT: right;WIDTH: 7px; LINE-HEIGHT: 50px; HEIGHT: 50px; TEXT-ALIGN: center;}
+.open {MARGIN: 0px;}
+.open a {BACKGROUND: url(o.gif) no-repeat;BACKGROUND-POSITION: 0px 0px; DISPLAY: block;FLOAT: right;WIDTH: 7px; LINE-HEIGHT: 50px; HEIGHT: 50px; TEXT-ALIGN: center;}
+#sh{background:#1e1e1e;}
