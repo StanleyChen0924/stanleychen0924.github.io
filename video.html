@@ -1,0 +1,72 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+<meta name="referrer" content="no-referrer">
+<title></title>
+<style>
+html, body ,#player{width:100%;height:100%;margin:auto;background-color:#000;}
+</style>
+<link href="./video/video-js.min.css" rel="stylesheet">
+<script src="./video/video.min.js"></script>
+<script src="./video/videojs-contrib-hls.min.js"></script>	
+<script src="./video/flv.min.1.5.js"></script>
+<script src="./video/zh-CN.js"></script>
+</head>
+
+<body topmargin="0" leftmargin="0" bgcolor="#000000" scroll="no">
+<video style="height:100%;width:100%;" id="player" class="video-js vjs-big-play-centered" controls autoplay></video>
+    <script>
+      var vid = location.href.split('html?id=')[1];
+      if(vid.indexOf("m3u8")>-1||vid.indexOf('php')>-1){
+            var myPlayer = videojs("player");
+            myPlayer.src({
+            src: vid,
+            type: 'application/x-mpegURL'
+            });
+	    myPlayer.play();
+        };
+
+        if(vid.indexOf('flv')>-1){
+         if (flvjs.isSupported()) {
+            startVideo()
+         }
+         function startVideo(){
+            var videoElement = document.getElementById('player');
+            var flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                isLive: true,
+                enableStashBuffer: true,
+                url: vid
+            });
+            flvPlayer.attachMediaElement(videoElement);
+            flvPlayer.load();
+            flvPlayer.play();
+         }
+       }
+
+        if(vid.indexOf('mp4')>-1){
+         if (flvjs.isSupported()) {
+            startVideo()
+         }
+         function startVideo(){
+            var videoElement = document.getElementById('player');
+            var flvPlayer = flvjs.createPlayer({
+                type: 'mp4',
+                isLive: true,
+                enableStashBuffer: true,
+                url: vid
+            });
+            flvPlayer.attachMediaElement(videoElement);
+            flvPlayer.load();
+            flvPlayer.play();
+         }
+       }
+    </script>
+</body>
+
+</html>
