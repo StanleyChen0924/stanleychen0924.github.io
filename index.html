@@ -104,8 +104,6 @@
 <!--frameset cols=100,* rows=* -->
 <!--ROWS="100,*" 上下分割-->
 <!--cols=200,* rows=* 左右分割-->
-<!--frame src = "left.html">
-<frame src = "right.html"-->
 
 <frame src="PTS13.html" name="right">
 
@@ -129,28 +127,5 @@
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','GTM-P2WSTMR');</script>
 	
-  <script language="JavaScript"> 
-	<!--  
-	document.write('<div align="center"><font size="5">'); 
-	document.write("<span id='clock'></span>"); 
-	var now,hours,minutes,seconds,timeValue; 
-
-	function showtime(){ 
-	now = new Date(); 
-	hours = now.getHours(); 
-	minutes = now.getMinutes(); 
-	seconds = now.getSeconds(); 
-	timeValue = (hours >= 12) ? "?U?? : "?W??; 
-	timeValue += ((hours > 12) ? hours - 12 : hours) + " 時"; 
-	timeValue += ((minutes < 10) ? " 0" : " ") + minutes + " 分"; 
-	timeValue += ((seconds < 10) ? " 0" : " ") + seconds + " 秒"; 
-	clock.innerHTML = timeValue; 
-	setTimeout("showtime()",100); 
-	} 
-
-	showtime(); 
-	document.write('</font></div>');
-	//--> 
-	</script>
 
 </html>
