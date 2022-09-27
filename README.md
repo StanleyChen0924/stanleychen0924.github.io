@@ -11,8 +11,7 @@
 | [![build](https://github.com/stanleychen0924/stanleychen0924.github.io/actions/workflows/php.yml/badge.svg)](https://github.com/stanleychen0924/stanleychen0924.github.io/actions/workflows/YTlive.yml/)|
 
 
-Visitor traffic:
-
+Visitor traffic
 <img src="https://www.f-counter.net/j/49/1664242542/" />
 
 ![](https://komarev.com/ghpvc/?username=stanleychen0924&color=green)
