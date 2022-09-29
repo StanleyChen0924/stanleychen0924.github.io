@@ -1,0 +1,16 @@
+﻿html{background-color:#000000;margin-left: 0px;margin-top: 0px;margin-right: 0px;margin-bottom: 0px;overflow:hidden;FONT-FAMILY:黑体;font-size:14px;font-weight:bold;}
+body{margin:0px;}
+#menubox {position: absolute; width: 195px; height: 100%;background:blue;left: 0px; top: 0px;display: none;}
+#menu {background-color: #303030;width: 195px;height:100%;overflow-x:hidden;overflow-y:auto;SCROLLBAR-ARROW-COLOR: #9F9F9F; SCROLLBAR-DARKSHADOW-COLOR:#141414; SCROLLBAR-BASE-COLOR: #141414}
+#ts{background:#005500;width: 195px;height:30px;line-height:30px;color:#f90;padding-left:25px;border-bottom:1px solid #303030;}
+#menu a{background:#404040 url('zs1.gif') no-repeat 10px center;height:30px;line-height:30px;display:block;border-bottom:1px solid #303030;color:#d5d5d5;font-size:14px;font-weight:bold;text-decoration:none; padding-left:25px;}
+#menu a:hover{background:#a00 url('linkarrow.png') no-repeat right center;color:#ff0;text-decoration:none}
+#zk{position: absolute; background:#1e1e1e url(c.gif) no-repeat center center;width: 7px; height: 100%;left: 0px; top: 0px;cursor:hand}
+#sh{position: absolute; background:#1e1e1e url(o.gif) no-repeat center center;width: 7px; height: 100%;left: 195px; top: 0px;cursor:hand;display: none;}
+#playbox{position: absolute;left:7px;right:0px;height:100%;top:0px}
+
+p{background: #404040;margin:0px;
+height:30px;line-height:30px;color:#f90;border-bottom:1px solid #303030; padding-left:25px;
+}
+
+#menu a:focus{background:olive;}
