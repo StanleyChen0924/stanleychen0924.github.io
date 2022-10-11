@@ -99,7 +99,7 @@ jobs:
         #EXTM3U
         #EXT-X-VERSION:3
         #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000
-        $(youtube-dl -g --proxy socks4://210.61.216.66:33990/ https://www.youtube.com/watch?v=JAzRXylm3M0)
+        $(youtube-dl -g --proxy socks4://210.61.216.66:33990/ https://www.youtube.com/watch?v=4Uc00FPs27M)
         EOL
     - name: Get PTS2.m3u8
       run: |
@@ -117,7 +117,7 @@ jobs:
         #EXTM3U
         #EXT-X-VERSION:3
         #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000
-        $(youtube-dl -g https://www.youtube.com/watch?v=cnYQ_z7QfxE)
+        $(youtube-dl -g https://www.youtube.com/watch?v=6KlRR_DGhmI)
         EOL
     - name: Get FM107.m3u8
       run: |
@@ -162,7 +162,7 @@ jobs:
         #EXTM3U
         #EXT-X-VERSION:3
         #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000
-        $(youtube-dl -g https://www.youtube.com/watch?v=V0WxUakDV7M)
+        $(youtube-dl -g https://www.youtube.com/watch?v=2mCSYvcfhtc&t=0s)
         EOL
     - name: Get SETLiveNews.m3u8
       run: |
@@ -171,7 +171,7 @@ jobs:
         #EXTM3U
         #EXT-X-VERSION:3
         #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000
-        $(youtube-dl -g https://www.youtube.com/watch?v=FoBfXvlOR6I)
+        $(youtube-dl -g https://www.youtube.com/watch?v=WHphOJQ2yEE)
         EOL
     - name: Get SETiLiveNews.m3u8
       run: |
@@ -189,7 +189,7 @@ jobs:
         #EXTM3U
         #EXT-X-VERSION:3
         #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000
-        $(youtube-dl -g https://www.youtube.com/watch?v=lu_BJKxqGnk)
+        $(youtube-dl -g https://www.youtube.com/watch?v=_QbRXRnHMVY)
         EOL
     - name: Get FTVNews.m3u8
       run: |
@@ -198,7 +198,7 @@ jobs:
         #EXTM3U
         #EXT-X-VERSION:3
         #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000
-        $(youtube-dl -g https://www.youtube.com/watch?v=XxJKnDLYZz4)
+        $(youtube-dl -g https://www.youtube.com/watch?v=ylYJSBUgaMA)
         EOL
     - name: Get DaAiI.m3u8
       run: |
@@ -298,24 +298,6 @@ jobs:
         #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000
         $(youtube-dl -g https://www.youtube.com/watch?v=wrYF0HX7Kzc)
         EOL
-    - name: Get MusicCi24.m3u8
-      run: |
-        touch ./MusicCi24.m3u8
-        sudo cat >./MusicCi24.m3u8 <<EOL
-        #EXTM3U
-        #EXT-X-VERSION:3
-        #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000
-        $(youtube-dl -g https://www.youtube.com/watch?v=uUBfbLdXArA)
-        EOL
-    - name: Get MusicJp24.m3u8
-      run: |
-        touch ./MusicJp24.m3u8
-        sudo cat >./MusicJp24.m3u8 <<EOL
-        #EXTM3U
-        #EXT-X-VERSION:3
-        #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000
-        $(youtube-dl -g https://www.youtube.com/watch?v=NJvaGDTJEQU)
-        EOL
     - name: Get hsxw.m3u8
       run: |
         touch ./hsxw.m3u8
@@ -325,7 +307,7 @@ jobs:
         #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000
         $(youtube-dl -g http://www.youtube.com/channel/UCA_hK5eRICBdSOLlXKESvEg/live)
         EOL
-    - name: Get MusicJp24.m3u8
+    - name: Get KBSKOREA.m3u8
       run: |
         touch ./KBSKOREA.m3u8
         sudo cat >./KBSKOREA.m3u8 <<EOL
