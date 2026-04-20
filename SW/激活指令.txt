@@ -1,0 +1,10 @@
+irm https://massgrave.dev/get | iex
+
+
+https://github.com/massgravel/Microsoft-Activation-Scripts
+https://massgrave.dev/
+
+
+
+Download Original Windows & Office
+https://massgrave.dev/genuine-installation-media.html
