@@ -1,0 +1,167 @@
+﻿http://10.4.5.13/phpMyAdmin/
+
+http://169.254.10.2/phpMyAdmin
+
+khmfgadmin@liteon
+
+PrePost Table
+Save Flag+1 and LOG 80 10
+
+
+STA1
+Built-in Table
+	17	GetSubStringFromData	@INPUT_Number@,INPUT_ISN,0,9
+	30	GetDataTimeString	yyyy-MM-dd HH:mm:ss,CURRENT_DATE
+	31	GetDosCmdOutput	python.exe PyMySQL.py 256 @GLOBAL_INPUT_ISN@,GLOBAL_INPUT_SSN
+	32	GetDosCmdOutput	echo @GLOBAL_INPUT_SSN@,GLOBAL_INPUT_SSN
+	
+DOS Command Table
+	5	python.exe PyMySQL.py 2 @INPUT_ISN@	PASS	Pass	Fixation	0	0	False
+	10	python.exe PyMySQL.py 3 @INPUT_ISN@	PASS	Pass	Fixation	0	0	False
+	6	python.exe PyMySQL.py 10 @INPUT_ISN@	PASS	Pass	Fixation	0	0	False
+	7	python.exe PyMySQL.py 80 @INPUT_ISN@ ,StartTime='@CURRENT_DATE@',throughTime=@LOG_PARAM_TEST_TIME@,log='@LOG_PARAM_TEST_RESULT@',errorCode='@ERR_CODE@'	PASS	Pass	Fixation	0	0	False
+	8	python.exe PyMySQL.py 64 @INPUT_ISN@ ,StartTime='@CURRENT_DATE@',throughTime=@LOG_PARAM_TEST_TIME@,log='@LOG_PARAM_TEST_RESULT@',errorCode='@ERR_CODE@'	PASS	Pass	Fixation	0	0	False
+	9	python.exe PyMySQL.py 128 @INPUT_ISN@ RF1_SN='@GLOBAL_INPUT_KPSN0@',RF2_SN='@GLOBAL_INPUT_KPSN1@'	PASS	Pass	Fixation	0	0	False
+	11	python.exe PyMySQL.py 256 @INPUT_SSN@	PASS	Pass	Fixation	0	0	False
+	15	python.exe PyMySQL.py 128 @INPUT_ISN@ CSN='@GLOBAL_INPUT_SSN@',CMAC='@GLOBAL_INPUT_MAC1@'	PASS	Pass	Fixation	0	0	False
+	16	python.exe PyMySQL.py 16 @INPUT_ISN@	PASS	Pass	Fixation	0	0	False
+
+PrePost	Table
+Pre Action Table
+	19	Get Main Board SN	BuiltInCommand	17	5000		True	
+	20	Get Start Time	BuiltInCommand	30	1000		True	
+Post Action Table
+	6	UpDate PASS STA+100	DOSCommand	6	5000	Pass	True	True	
+	7	Save Flag+1 and LOG	DOSCommand	7	5000	Both	True	True	
+	8	UpDate PASS DATA	DOSCommand	15	5000	Pass	True	True	
+
+
+
+	
+STA2
+Built-in Table
+  30	GetDataTimeString	yyyy-MM-dd HH:mm:ss,CURRENT_DATE
+	79	DelayTime	5000
+	85	GetDosCmdOutput	python.exe PyMySQL.py 256 @GLOBAL_INPUT_ISN@,GLOBAL_INPUT_SSN
+	86	GetDosCmdOutput	echo @GLOBAL_INPUT_SSN@,GLOBAL_INPUT_SSN
+		
+DOS Command Table
+	42	python.exe PyMySQL.py 2 @GLOBAL_INPUT_ISN@	PASS	Pass	Fixation	0	0	False
+	43	python.exe PyMySQL.py 10 @GLOBAL_INPUT_ISN@	PASS	Pass	Fixation	0	0	False
+	44	python.exe PyMySQL.py 80 @GLOBAL_INPUT_ISN@ ,StartTime='@CURRENT_DATE@',throughTime=@LOG_PARAM_TEST_TIME@,log='@LOG_PARAM_TEST_RESULT@',errorCode='@ERR_CODE@'	PASS	Pass	Fixation	0	0	False
+	45	python.exe PyMySQL.py 64 @GLOBAL_INPUT_ISN@ ,StartTime='@CURRENT_DATE@',throughTime=@LOG_PARAM_TEST_TIME@,log='@LOG_PARAM_TEST_RESULT@',errorCode='@ERR_CODE@'	PASS	Pass	Fixation	0	0	False
+	46	python.exe PyMySQL.py 128 @GLOBAL_INPUT_ISN@ RF1_SN='@GLOBAL_INPUT_KPSN0@',RF2_SN='@GLOBAL_INPUT_KPSN1@'	PASS	Pass	Fixation	0	0	False
+	47	python.exe PyMySQL.py 3 @GLOBAL_INPUT_ISN@	PASS	Pass	Fixation	0	0	False
+	50	echo INPUT_ISN=@GLOBAL_INPUT_ISN@		Pass	Fixation	0	0	False
+	51	python.exe PyMySQL.py 256 @GLOBAL_INPUT_SSN@	@GLOBAL_INPUT_SSN@	Pass	Fixation	0	0	False
+
+PrePost	Table
+Pre Action Table
+	6	Get CSN form MySQL	BuiltInCommand	85	5000		True	
+	7	Show CSN	BuiltInCommand	86	5000		True	
+	19	Get Start Time	BuiltInCommand	78	1000		True	
+	
+Post Action Table
+	1	UpDate PASS STA2+100	DOSCommand	43	5000	Pass	True	True	
+	2	Save Flag+1 and LOG	DOSCommand	44	5000	Both	True	True	
+
+AutoTest Actions
+	2	Scan MB SN	84	5000		
+	
+Group Table
+	49	Get CSN and Show CSN	0	False
+	
+	0	Get iSN	DOSCommand	50	5000		True	
+	1	Get CSN	BuiltInCommand	85	5000		True	
+	2	Show CSN	BuiltInCommand	86	5000		True	
+
+Congig Setup
+	1	True	Get CSN from MySQL and Show CSN	GroupCheck	49	5000			
+	2	True	echo INPUT_RFSN1	DOSCommand	48	5000			
+	3	True	echo INPUT_RFSN0	DOSCommand	49	5000			
+	4	True	echo GLOBAL_INPUT_ISN	DOSCommand	50	5000			
+	5	True	MySQL	DOSCommand	47	5000	SQL0001	Check MySQL Error	
+	6	True	Delay Time 5s	BuiltInCommand	77	5000	SWT32	Ping失敗	
+	7	True	MySQL Up MB_SN,RF1_SN,RF2_SN	DOSCommand	46	5000	SQL0001	Update MtSQL Error	
+	8	True	Delay Time 5s	BuiltInCommand	79	5000	SWT32	Ping失敗	
+
+
+
+
+python.exe PyMySQL.py 1 @GLOBAL_INPUT_ISN@
+python.exe PyMySQL.py 2 @GLOBAL_INPUT_ISN@
+python.exe PyMySQL.py 10 @GLOBAL_INPUT_ISN@
+python.exe PyMySQL.py 64 @GLOBAL_INPUT_ISN@ ,StartTime='@CURRENT_DATE',throughTime=@LOG_PARAM_TEST_TIME@,log='@LOG_PARAM_TEST_RESULT@',errorCode='@ERR_CODE@'
+python.exe PyMySQL.py 80 @GLOBAL_INPUT_ISN@ ,StartTime='@CURRENT_DATE@',throughTime=@LOG_PARAM_TEST_TIME@,log='@LOG_PARAM_TEST_RESULT@',errorCode='@ERR_CODE@'
+python.exe PyMySQL.py 128 @GLOBAL_INPUT_ISN@ ,RF1_SN='@GLOBAL_INPUT_KPSN0@',RF2_SN='@GLOBAL_INPUT_KPSN1@'
+python.exe PyMySQL.py 256 @GLOBAL_INPUT_SSN@
+
+python.exe PyMySQL.py 128 @GLOBAL_INPUT_ISN@ ,CSN='@GLOBAL_INPUT_SSN@'
+
+Action Table 3
+yyyy-MM-dd HH:mm:ss,CURRENT_DATE
+
+@GLOBAL_INPUT_KPSN0@
+@GLOBAL_INPUT_KPSN1@
+@GLOBAL_INPUT_KPSN2@
+
+
+0x1:1
+PyMySQL.exe 1 230411797
+sql = f"SELECT {TableDetailStr} FROM CARD WHERE iSN = '{sn_param}'{MySQL_BeforStation}"
+
+0x2:2
+PyMySQL.exe 2 230411797
+sql = f"SELECT {TableDetailStr} FROM {MySQL_TYPE} WHERE iSN = '{sn_param}'"
+
+0x4:4
+python PyMySQL.py 4 230411797 isn CMAC,CSN or PyMySQL.exe 4 14:3F:C3:90:6F:C3 CMAC *
+sql = f"SELECT {select_columns} FROM {MySQL_TYPE} WHERE {where_column} = %s"
+
+0x8:8
+PyMySQL.exe 8 230411797
+sql = f"INSERT INTO {MySQL_TYPE} SET iSN='{sn_param}',{TableDetailStr}=100 ON DUPLICATE KEY UPDATE {TableDetailStr} = {TableDetailStr} + 100"
+
+0x10:16
+PyMySQL.exe 16 230411797
+sql = f"INSERT INTO {MySQL_TYPE} SET iSN='{sn_param}',{TableDetailStr}=1 ON DUPLICATE KEY UPDATE {TableDetailStr} = {TableDetailStr} + 1"
+
+0x20:32
+PyMySQL.exe 32 230411797
+sql = f"UPDATE {MySQL_TYPE} SET {TableDetailStr}={TableDetailStr}+100 {full_string} WHERE iSN = '{sn_param}'"
+
+0x40:64
+PyMySQL.exe 64 230411797
+sql = (f"INSERT INTO {TableDetailStr} SET "
+                        f"iSN = '{sn_param}',"
+                        f"JobNum = '{MySQL_Job}',"
+                        f"ModelName = '{MySQL_ModelName}',"
+                        f"operator = '{MySQL_Operator}',"
+                        f"Station = '{MySQL_Station}',"
+                        f"StopTime = '{formatted_time}'"
+                        f"{full_string}"
+                )
+                
+0x80:128
+PyMySQL.exe 128 230411797 ,full_string
+sql = f"UPDATE {MySQL_TYPE} SET {full_string} WHERE iSN = '{sn_param}'"
+
+0x100:256
+PyMySQL.exe 256 123456789
+sql = f"SELECT iSN FROM {MySQL_TYPE} WHERE CSN = '{sn_param}'"
+
+0x200:512
+PyMySQL.exe 512 230411797
+將當前最新時間寫入註冊表
+
+0x400:1024
+PyMySQL.exe 1024 SA-AN-220-RT STA1_Version
+查詢產品版本
+
+0x800:2048
+
+https://github.com/StanleyChen0924/U-MEDiA
+               
+https://raw.githubusercontent.com/StanleyChen0924/U-MEDiA/refs/heads/main/PyMySQL.py
+
+https://raw.githubusercontent.com/StanleyChen0924/U-MEDiA/refs/heads/main/MySqlcommand.txt
